@@ -12,30 +12,38 @@ class _LandingPageState extends State<LandingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
+      body: SafeArea(
         child: Stack(
           children: [
             Container(
               // Background
-              color: const Color(0xFF53624F),
+              color: const Color(0xFF38384E),
               width: double.infinity,
               height: double.infinity,
             ),
             Positioned(
               // Logo
-              top: MediaQuery.of(context).size.height / 10,
+              top: MediaQuery.of(context).size.height / 6,
               left: MediaQuery.of(context).size.width / 2 - 100,
               child: Container(
-                width: 200,
-                height: 200,
                 decoration: const BoxDecoration(
                   shape: BoxShape.circle,
                   color: Color(0xFFD9D9D9),
                 ),
+                child: Align(
+                  alignment: Alignment.center,
+                  child: Image.asset(
+                    'assets/images/logo.png',
+                    fit: BoxFit.cover,
+                    height: 200,
+                    width: 200,
+                  ),
+                ),
               ),
             ),
             Positioned(
-              bottom: MediaQuery.of(context).size.height / 5,
+              // Start button
+              bottom: MediaQuery.of(context).size.height / 10,
               left: MediaQuery.of(context).size.width * 0.3,
               right: MediaQuery.of(context).size.width * 0.3,
               child: SizedBox(
@@ -52,10 +60,10 @@ class _LandingPageState extends State<LandingPage> {
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor:
-                        const Color(0xFFD2E3C8), // Set the background color
+                        const Color(0xFFC8F560), // Set the background color
                   ),
                   child: const Text(
-                    'Start',
+                    'START',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         color: Colors.black,

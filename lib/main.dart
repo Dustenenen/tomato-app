@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:tomatoapp/screens/CameraPage.dart';
 import 'package:tomatoapp/screens/LandingPage.dart';
-import 'package:tomatoapp/screens/MyHomePage.dart';
 import 'package:camera/camera.dart';
 
 void main() async {
