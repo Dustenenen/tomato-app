@@ -15,6 +15,7 @@ class CameraPage extends StatefulWidget {
 
 class _CameraPageState extends State<CameraPage> {
   late CameraController _controller;
+  double _zoomLevel = 0.0;
 
   // For picker
   File? galleryFile;
@@ -76,19 +77,37 @@ class _CameraPageState extends State<CameraPage> {
                         shape: BoxShape.rectangle,
                         color: const Color(0xFFD9D9D9),
                         borderRadius: BorderRadius.circular(10)),
-                    child: CameraPreview(_controller),
+                    child: CameraPreview(_controller..setZoomLevel(_zoomLevel)),
                   ),
                 ),
               ],
             ),
             Align(
+              alignment: Alignment.center,
+              child: Padding(
+                padding: EdgeInsets.fromLTRB(
+                    20, MediaQuery.of(context).size.height / 2.75, 20, 16),
+                child: Slider(
+                  value: _zoomLevel,
+                  min: 0.0,
+                  max: 3.0,
+                  onChanged: (value) {
+                    setState(() {
+                      _zoomLevel = value;
+                      _controller.setZoomLevel(_zoomLevel);
+                    });
+                  },
+                ),
+              ),
+            ),
+            Align(
               alignment: Alignment.centerLeft,
               child: Padding(
-                padding: EdgeInsets.only(
-                  left: 24,
-                  bottom: 16,
-                  top: MediaQuery.of(context).size.height / 2.5,
-                ),
+                padding: EdgeInsets.fromLTRB(
+                    MediaQuery.of(context).size.width / 10,
+                    MediaQuery.of(context).size.height / 2.25,
+                    20,
+                    16),
                 child: const Text(
                   'Predicted Disease: ',
                   style: TextStyle(color: Colors.white),
@@ -98,11 +117,11 @@ class _CameraPageState extends State<CameraPage> {
             Align(
               alignment: Alignment.centerLeft,
               child: Padding(
-                padding: EdgeInsets.only(
-                  left: 24,
-                  bottom: 16,
-                  top: MediaQuery.of(context).size.height / 2,
-                ),
+                padding: EdgeInsets.fromLTRB(
+                    MediaQuery.of(context).size.width / 10,
+                    MediaQuery.of(context).size.height / 1.75,
+                    20,
+                    16),
                 child: const Text(
                   'Confidence Level:',
                   style: TextStyle(color: Colors.white),
