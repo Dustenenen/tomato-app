@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:gallery_saver/gallery_saver.dart';
-import 'package:tomatoapp/screens/LearnMore.dart';
 
 late List<CameraDescription> cameras;
 
@@ -19,7 +18,6 @@ class _CameraPageState extends State<CameraPage> {
   late CameraController _controller;
   double _zoomLevel = 0.0;
   bool _sliderVisible = true;
-  bool _learnMoreEnabled = false;
 
   // For picker
   File? galleryFile;
@@ -144,13 +142,7 @@ class _CameraPageState extends State<CameraPage> {
               child: Padding(
                 padding: const EdgeInsets.only(left: 16, bottom: 16),
                 child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                LearnMore(image: galleryFile)));
-                  },
+                  onPressed: null,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color.fromARGB(255, 29, 168, 47),
                     foregroundColor: Colors.white,
@@ -216,7 +208,6 @@ class _CameraPageState extends State<CameraPage> {
     setState(() {
       galleryFile = File(file.path);
       _sliderVisible = false; // Hide the slider after capturing
-      _learnMoreEnabled = true;
     });
 
     // Save the image to the photo library
