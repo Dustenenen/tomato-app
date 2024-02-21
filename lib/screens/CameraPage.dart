@@ -62,7 +62,7 @@ class _CameraPageState extends State<CameraPage> {
         child: Stack(
           children: [
             Positioned(
-              width: MediaQuery.of(context).size.width * 1,
+              width: MediaQuery.of(context).size.width * 0.95,
               top: MediaQuery.of(context).size.height / 1.68,
               child: Slider(
                 value: _zoomLevel,
@@ -92,7 +92,9 @@ class _CameraPageState extends State<CameraPage> {
                         shape: BoxShape.rectangle,
                         color: const Color(0xFFD9D9D9),
                         borderRadius: BorderRadius.circular(10)),
-                    child: CameraPreview(_controller..setZoomLevel(_zoomLevel)),
+                    child: galleryFile == null
+                        ? CameraPreview(_controller..setZoomLevel(_zoomLevel))
+                        : Center(child: Image.file(galleryFile!)),
                   ),
                 ),
               ],
