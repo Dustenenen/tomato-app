@@ -61,6 +61,21 @@ class _CameraPageState extends State<CameraPage> {
       body: Center(
         child: Stack(
           children: [
+            Positioned(
+              width: MediaQuery.of(context).size.width * 1,
+              top: MediaQuery.of(context).size.height / 1.68,
+              child: Slider(
+                value: _zoomLevel,
+                min: 0.0,
+                max: 3.0,
+                onChanged: (value) {
+                  setState(() {
+                    _zoomLevel = value;
+                    _controller.setZoomLevel(_zoomLevel);
+                  });
+                },
+              ),
+            ),
             Stack(
               alignment: Alignment.center, // Align the children to the center
               children: [
@@ -81,24 +96,6 @@ class _CameraPageState extends State<CameraPage> {
                   ),
                 ),
               ],
-            ),
-            Align(
-              alignment: Alignment.center,
-              child: Padding(
-                padding: EdgeInsets.fromLTRB(
-                    20, MediaQuery.of(context).size.height / 2.75, 20, 16),
-                child: Slider(
-                  value: _zoomLevel,
-                  min: 0.0,
-                  max: 3.0,
-                  onChanged: (value) {
-                    setState(() {
-                      _zoomLevel = value;
-                      _controller.setZoomLevel(_zoomLevel);
-                    });
-                  },
-                ),
-              ),
             ),
             Align(
               alignment: Alignment.centerLeft,
