@@ -40,10 +40,8 @@ class LearnMore extends StatelessWidget {
             Container(
               margin: EdgeInsets.only(
                   bottom: MediaQuery.of(context).size.height * 0.03),
-              width: MediaQuery.of(context).size.width *
-                  0.9, // 80% of the screen width
-              height: MediaQuery.of(context).size.height *
-                  0.4, // 50% of the screen height
+              width: MediaQuery.of(context).size.width * 0.9,
+              height: MediaQuery.of(context).size.height * 0.4,
               child: Image.file(image!),
             ),
             Padding(
