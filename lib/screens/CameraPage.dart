@@ -1,10 +1,9 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:gallery_saver/gallery_saver.dart';
-import 'package:tomatoapp/screens/LearnMore.dart';
+import 'package:tomatoapp/screens/LearnMore.dart'; 
 
 late List<CameraDescription> cameras;
 
@@ -19,6 +18,7 @@ class _CameraPageState extends State<CameraPage> {
   late CameraController _controller;
   double _zoomLevel = 0.0;
   bool _sliderVisible = true;
+  bool _imageCaptured = false; 
 
   // For picker
   File? galleryFile;
@@ -55,8 +55,7 @@ class _CameraPageState extends State<CameraPage> {
         },
         backgroundColor: const Color.fromARGB(255, 29, 168, 47),
         shape: const CircleBorder(),
-        // ignore: prefer_const_constructors
-        child: Icon(
+        child: const Icon(
           Icons.file_upload_rounded,
           color: Colors.white,
         ),
@@ -91,19 +90,18 @@ class _CameraPageState extends State<CameraPage> {
                         MediaQuery.of(context).size.width * 0.45,
                     child: Container(
                       width: MediaQuery.of(context).size.width *
-                          0.9, // 80% of the screen width
+                          0.9, 
                       height: MediaQuery.of(context).size.height *
-                          0.5, // 50% of the screen height
+                          0.5, 
                       decoration: BoxDecoration(
                           shape: BoxShape.rectangle,
                           color: const Color(0xFFD9D9D9),
                           borderRadius: BorderRadius.circular(10)),
                       child: galleryFile == null
                           ? CameraPreview(_controller
-                            ..setZoomLevel(_zoomLevel)
-                            ..startImageStream((image) {
-                              // Do something with the image stream
-                            }))
+                              ..setZoomLevel(_zoomLevel)
+                              ..startImageStream((image) {
+                              }))
                           : Image.file(galleryFile!),
                     ),
                   ),
@@ -143,13 +141,7 @@ class _CameraPageState extends State<CameraPage> {
               child: Padding(
                 padding: const EdgeInsets.only(left: 16, bottom: 16),
                 child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                LearnMore(image: galleryFile)));
-                  },
+                  onPressed: _imageCaptured ? _goToLearnMorePage : null,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color.fromARGB(255, 29, 168, 47),
                     foregroundColor: Colors.white,
@@ -214,10 +206,17 @@ class _CameraPageState extends State<CameraPage> {
     final XFile file = await _controller.takePicture();
     setState(() {
       galleryFile = File(file.path);
-      _sliderVisible = false; // Hide the slider after capturing
+      _sliderVisible = false; 
+      _imageCaptured = true; 
     });
 
-    // Save the image to the photo library
     await GallerySaver.saveImage(file.path);
+  }
+
+  void _goToLearnMorePage() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => LearnMore(image: galleryFile)),
+    );
   }
 }
