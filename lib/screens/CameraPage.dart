@@ -52,24 +52,24 @@ class _CameraPageState extends State<CameraPage> {
       floatingActionButton: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          FloatingActionButton(
-            onPressed: () {
-              _showPicker(context: context);
-            },
-            backgroundColor: const Color.fromARGB(255, 29, 168, 47),
-            shape: const CircleBorder(),
-            child: const Icon(
+          const FloatingActionButton(
+            onPressed: null,
+            backgroundColor: Color.fromARGB(255, 29, 168, 47),
+            shape: CircleBorder(),
+            child: Icon(
               Icons.delete,
               color: Colors.white,
             ),
           ),
-          const Padding(
-            padding: EdgeInsets.only(left: 10),
+          Padding(
+            padding: const EdgeInsets.only(left: 10),
             child: FloatingActionButton(
-              onPressed: null,
-              backgroundColor: Color.fromARGB(255, 29, 168, 47),
-              shape: CircleBorder(),
-              child: Icon(
+              onPressed: () {
+                _showPicker(context: context);
+              },
+              backgroundColor: const Color.fromARGB(255, 29, 168, 47),
+              shape: const CircleBorder(),
+              child: const Icon(
                 Icons.file_upload_rounded,
                 color: Colors.white,
               ),
